@@ -1,0 +1,50 @@
+<div class="card border-0 shadow-sm mb-3" style="width: 100%; max-width: 900px; margin: auto; border-radius: 10px;">
+  <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #e1e1e1; padding: 15px;">
+    <h4 class="m-0" style="font-weight: bold; color: #333;">Listado de clientes</h4>
+  </div>
+  <div class="card-body" style="padding: 20px;">
+    <div *ngIf="clientes?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos
+    </div>
+
+    <table class="table table-hover table-striped" *ngIf="clientes.length > 0" style="border-radius: 10px;">
+      <thead style="background-color: #f1f1f1; font-weight: 600; color: #555;">
+        <tr>
+          <th>id</th>
+          <th>nombres</th>
+          <th>apellidos</th>
+          <th>email</th>
+          <th>fecha de creacion</th>
+          <th>región</th>
+          <th>imagen</th> <!-- Nueva columna para la imagen -->
+          <th>editar</th>
+          <th>eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of clientes">
+          <td>{{ element.id }}</td>
+          <td>{{ element.nombre }}</td>
+          <td>{{ element.apellido }}</td>
+          <td>{{ element.email }}</td>
+          <td>{{ element.createAt }}</td>
+          <td>{{ element.region.nombre }}</td>
+          <td>
+            <!-- Imagen por defecto -->
+            <img src="https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Begrippenlijst.svg" alt="Imagen por defecto" style="width: 50px; height: 50px; border-radius: 50%;">
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editarCliente(element.id)">
+              <i class="fa fa-edit"></i> Editar
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="eliminarCliente(element.id)">
+              <i class="fa fa-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
